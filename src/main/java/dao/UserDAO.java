@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+public class UserDAO implements UserDAOInterface{
     private Connection connection;
 
     public UserDAO(Connection connection) {
@@ -38,9 +38,9 @@ public class UserDAO {
         }
     }
 
-    public void deleteUser(long id) {
+    public void deleteUser(User user) {
         try (PreparedStatement preparedStatement = connection.prepareStatement("delete from users where id= ?")) {
-            preparedStatement.setLong(1, id);
+            preparedStatement.setLong(1, user.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

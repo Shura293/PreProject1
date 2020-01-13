@@ -17,8 +17,7 @@ public class ServletUserPage extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("UserServlet 3");
-        List<List<String>> lists = new UserService().getAllUsersList();
+        List<User> lists = UserService.getInstance().getAllUsers();
         lists.forEach(System.out::println);
         request.setAttribute("lists" , lists);
         request.getRequestDispatcher("WEB-INF/userTable.jsp").forward(request, response);

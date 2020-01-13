@@ -14,8 +14,6 @@ import java.util.List;
 @WebServlet("/Update")
 public class ServletUserUpdate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("UpdateServlet 2");
-        System.out.println(request.getParameter("EditType"));
         if ("AddStart".equals(request.getParameter("EditType"))) {
             request.setAttribute("EditType", "AddStart");
             request.setAttribute("id", "id");
@@ -26,13 +24,13 @@ public class ServletUserUpdate extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/update.jsp").forward(request, response);
 
         } else if ("AddEnd".equals(request.getParameter("EditType"))) {
-            new UserService().addUser( new User(
+            UserService.getInstance().addUser( new User(
                     request.getParameter("userName"),
                     request.getParameter("firstName"),
                     request.getParameter("secondName"),
                     Byte.parseByte(request.getParameter("age"))
             ));
-            request.setAttribute("lists" , new UserService().getAllUsersList());
+            request.setAttribute("lists" , UserService.getInstance().getAllUsers());
             request.getRequestDispatcher("WEB-INF/userTable.jsp").forward(request, response);
 
         } else if ("UpdateStart".equals(request.getParameter("EditType"))) {
@@ -45,27 +43,29 @@ public class ServletUserUpdate extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/update.jsp").forward(request, response);
 
         } else if ("UpdateEnd".equals(request.getParameter("EditType"))) {
-            System.out.println("UpdateEnd");
-            System.out.println("ID NOW " + Long.parseLong(request.getParameter("id")));
-            new UserService().updateUser( new User(
+            UserService.getInstance().updateUser( new User(
                     Long.parseLong(request.getParameter("id")),
                     request.getParameter("userName"),
                     request.getParameter("firstName"),
                     request.getParameter("secondName"),
                     Byte.parseByte(request.getParameter("age"))
             ));
-            request.setAttribute("lists" , new UserService().getAllUsersList());
+            request.setAttribute("lists" , UserService.getInstance().getAllUsers());
             request.getRequestDispatcher("WEB-INF/userTable.jsp").forward(request, response);
 
         } else if ("Delete".equals(request.getParameter("EditType"))) {
-            new UserService().deleteUser(Long.parseLong(request.getParameter("id")));
-            request.setAttribute("lists" , new UserService().getAllUsersList());
+            UserService.getInstance().deleteUser(new User(
+                    Long.parseLong(request.getParameter("id")),
+                    request.getParameter("userName"),
+                    request.getParameter("firstName"),
+                    request.getParameter("secondName"),
+                    Byte.parseByte(request.getParameter("age"))
+            ));
+            request.setAttribute("lists" , UserService.getInstance().getAllUsers());
             request.getRequestDispatcher("WEB-INF/userTable.jsp").forward(request, response);
         } else {
             System.out.println("Nothing");
         }
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

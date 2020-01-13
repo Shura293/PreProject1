@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 public class Utils {
-
+/*
     public static boolean idIsNumber(HttpServletRequest request) {
         final String id = request.getParameter("id");
         return id != null &&
@@ -35,5 +35,6 @@ public class Utils {
         return !(id != null &&
                 id.matches("[+]?\\d+") &&
                 repo.get(Integer.parseInt(id)) != null);
-    }
+    }*/
+
 }

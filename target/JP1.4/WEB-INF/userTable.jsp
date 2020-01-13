@@ -26,19 +26,19 @@
     <jsp:useBean id="lists" scope="request" type="java.util.List"/>
     <c:forEach var="user" items="${lists}">
         <tr>
-            <td>${user.get(0)}</td>
-            <td>${user.get(1)}</td>
-            <td>${user.get(2)}</td>
-            <td>${user.get(3)}</td>
-            <td>${user.get(4)}</td>
+            <td>${user.getId()}</td>
+            <td>${user.getUserName()}</td>
+            <td>${user.getFirstName()}</td>
+            <td>${user.getSecondName()}</td>
+            <td>${user.getAge()}</td>
 
             <td>
                 <form action="${pageContext.request.contextPath}/Update" method="POST">
-                    <input type="hidden" value="${user.get(0)}" name="id"/>
-                    <input type="hidden" value="${user.get(1)}" name="userName"/>
-                    <input type="hidden" value="${user.get(2)}" name="firstName"/>
-                    <input type="hidden" value="${user.get(3)}" name="secondName"/>
-                    <input type="hidden" value="${user.get(4)}" name="age"/>
+                    <input type="hidden" value="${user.getId()}" name="id"/>
+                    <input type="hidden" value="${user.getUserName()}" name="userName"/>
+                    <input type="hidden" value="${user.getFirstName()}" name="firstName"/>
+                    <input type="hidden" value="${user.getSecondName()}" name="secondName"/>
+                    <input type="hidden" value="${user.getAge()}" name="age"/>
                     <input type="hidden" value="UpdateStart" name="EditType"/>
                     <input type="submit" value="Update">
                 </form>
@@ -47,7 +47,7 @@
             <td>
                 <form action="${pageContext.request.contextPath}/Update" method="POST">
                     <input type="hidden" value="Delete" name="EditType"/>
-                    <input type="hidden" value="${user.get(0)}" name="id"/>
+                    <input type="hidden" value="${user.getId()}" name="id"/>
                     <input type="submit" value="Delete">
                 </form>
             </td>
